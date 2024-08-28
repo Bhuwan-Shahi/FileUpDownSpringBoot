@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Upload</title>
+    <style>
+        body {
+            background-color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        h1 {
+            color: green;
+        }
+
+        button {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>File Upload</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="fileInput" name="file">
+        <button type="submit">Upload</button>
+    </form>
+    <div id="uploadStatus"></div>
+</div>
+<script>
+    const uploadForm = document.getElementById('uploadForm');
+    const fileInput = document.getElementById('fileInput');
+    const uploadStatus = document.getElementById('uploadStatus');
+
+    uploadForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+
+        fetch('/Upload', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                uploadStatus.textContent = 'Upload successful';
+            } else {
+                uploadStatus.textContent = 'Upload failed';
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            uploadStatus.textContent = 'An error occurred';
+        });
+    });
+</script>
+</body>
+</html>

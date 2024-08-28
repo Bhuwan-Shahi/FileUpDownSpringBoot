@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>File Management</title>
+    <style>body {
+    background-color: #f2f2f2; /* Light gray */
+    color: #333; /* Dark green */
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ccc; /* Light gray border */
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+    color: #333;
+}
+
+th {
+    background-color: #f2f2f2; /* Light gray header */
+}
+
+a {
+    color: #333;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+    </style>
+</head>
+<body>
+<h1>Files List</h1>
+<table>
+ <thead>
+    <tr>
+        <th>File Name</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="file : ${files}">
+        <td th:text="${file}"></td>
+        <td><a th:href="@{/fastDownload(fileName=${file})}">Download</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
